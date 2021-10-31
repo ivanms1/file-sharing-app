@@ -31,21 +31,6 @@
       "options": {
         "buildTarget": "server:build"
       }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/server/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/server"],
-      "options": {
-        "jestConfig": "apps/server/jest.config.js",
-        "passWithNoTests": true
-      }
     }
   },
   "tags": []

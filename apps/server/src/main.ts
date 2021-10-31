@@ -1,21 +1,20 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import fastify, { FastifyInstance } from 'fastify';
+import { Server, IncomingMessage, ServerResponse } from 'http';
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+const PORT = 3333;
 
-import { AppModule } from './app/app.module';
+const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
+  fastify();
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
-  });
-}
+server.get('/', async (request, reply) => {
+  return { hello: 'world' };
+});
 
-bootstrap();
+// Start your server
+server.listen({ port: PORT }, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(0);
+  }
+  console.log(`Server listening at ${address}`);
+});
